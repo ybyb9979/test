@@ -1,0 +1,2843 @@
+
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui,, viewport-fit=cover, user-scalable=no">
+<meta name="description" content="">
+<meta name="keywords" content="">
+
+<meta id="metaOgUrl" property="og:url" content="m.lottecard.co.kr" />
+<meta id="metaOgTitle" property="og:title" content="" />
+<meta id="metaOgDescription" property="og:description" content="" />
+
+
+	
+	
+		
+	
+
+<title>회원 | 로그인</title>
+
+
+
+<link rel="stylesheet" href="//image.lottecard.co.kr/webapp/v2/web/assets/css/common-web-new.min.css">
+
+
+<script type="text/javascript">
+var gvImgUrl = "//image.lottecard.co.kr";
+var pageviewObj = new Object();
+</script>
+
+<script type="text/javascript" src="//image.lottecard.co.kr/webapp/v2/web/assets/plugins/jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="//image.lottecard.co.kr/webapp/v2/web/assets/plugins/jquery/jquery-ui.min.js"></script>
+
+
+	
+	
+
+
+
+
+
+
+
+<!-- 2019.01.02 DIVR유입의 경우 비로그인인 경우에도 세션체크 처리 -->
+
+
+<script type="text/javascript">
+
+
+function cmnOpenMenu() {
+	var isDiv = "false";
+	// 메뉴 json 파일 요청
+	if(isDiv == "true") {
+		$(".float-ars-menu").hide();
+	}
+	$(".gnb-layer").addClass("show");
+}
+
+function cmnCloseMenu() {
+	$(".float-ars-menu").show();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</head>
+
+<body class="">
+	<!-- 컨텐츠 영역 -->
+	<div class="loca-wrapper">
+		<div class="sub-wrapper ">
+			
+			
+				
+				
+					
+						<!-- 210831 : CMI : 로그인 헤더 -->
+						
+							<header id="sub_header" class="sub-header">
+								<a>logo</a>
+								<div class="menu-utils">
+									<a href="javascript:void(0);" onclick="svcf_Link('/app/LPSCHBA_V100.lc');" id="lnk_99-1" class="btn-search ga-click"><i class="custom-icon icon-search-dark"></i><span class="sr-only">검색페이지로 이동</span></a>
+									<button type="button" class="btn-hamberger" id="btn_99" onclick="cmnOpenMenu();">전체메뉴 열기</button>
+
+
+
+
+<script type="text/javascript">
+var recentMenu = [];
+
+$(function () {
+	var isDiv = "false";
+	// 메뉴 json 파일 요청
+	if(isDiv == "true") {
+		$.getJSON("//image.lottecard.co.kr/UploadFiles/frontMenuCfg/divrmenu2b.json", function(data) {
+			fnDivrMenuSetting(data);
+		});
+	} else {
+		$.getJSON("//image.lottecard.co.kr/UploadFiles/frontMenuCfg/LOCAmenu.json", function(data) {
+			fnMenuSetting(data);
+		});
+		
+		var lgnDtti = "";
+		
+		console.log(" ##### lgnDtti :: " + "");
+		
+		if(lgnDtti.indexOf(".") != -1) {
+			lgnDtti = lgnDtti.substring(0, lgnDtti.toString().indexOf("."));
+		}
+		
+
+	}
+	
+
+});
+
+//메뉴 조회 콜백 function
+function fnMenuSetting(data) {
+	
+	var lgnYn = "N";
+	
+	if(false) {
+		lgnYn = "Y";
+	}
+	
+	var locaYn = "";
+	var locaForYn = "";
+	var lolaYn = "";
+	var menuJson = data;
+	var menuHTML = "";
+	var subMenuHTML = "";
+	var ariaExpandedDep1 = "false";
+	var ariaExpandedDep2 = "false";
+
+	var memNm = "";
+	var mbrType = "";
+	
+	// 210726 : CMI : 최근 메뉴  - 로그인/비로그인 구분 추가	
+	var key = "";
+	key += "_recentlyMenus";
+	
+	menuHTML += '<div class="scroll-x">';
+	menuHTML += '<ul class="menu-list">';
+	
+	// loca_SaveDataWithKey
+	// loca_LoadDataWithKey
+	
+	// loca_LoadDataWithKey("recentMenu", appendRecentMenu);
+	
+	// 최근 이용 내역
+	if((window.localStorage.getItem(key) != null && window.localStorage.getItem(key) != "")) {
+		var menuArr = [];
+		menuArr = JSON.parse(window.localStorage.getItem(key));
+		
+		menuHTML += '<li><span>최근</span></li>';
+		
+		subMenuHTML += '<div class="depth2-section">';
+		subMenuHTML += '	<div class="depth2-group">';
+		subMenuHTML += '		<h2 class="depth2-title" href="#">최근이용 메뉴</h2>';
+		subMenuHTML += '		<ul class="depth2-list">';
+		
+		// 최근 이용 메뉴 draw
+		for(var l = menuArr.length-1; l >= 0; l--) {
+			subMenuHTML += '			<li>';
+			subMenuHTML += '				<a onclick=\"cmnMenuLink(\'' + menuArr[l].locaMenHlkDc + '\', \'' + menuArr[l].locaMenUrl + '\', \'' + menuArr[l].locaMenId + '\', \'' + menuArr[l].locaMenIdNm + '\', \'' + menuArr[l].urLgnYn + '\');\" id="' + menuArr[l].locaMenId + '" role="link" aria-expanded="' + ariaExpandedDep2 + '">' + menuArr[l].locaMenIdNm + '</a>';
+			subMenuHTML += '			</li>';
+		}
+		
+		subMenuHTML += '		</ul>';
+		subMenuHTML += '	</div>';
+		subMenuHTML += '</div>';
+	}
+
+	for(var i = 0; i < menuJson.menu.length; i++) {
+		// depth1 - 로그인 여부 확인
+		// if((menuJson.menu[i].urLgnYn == "Y" && lgnYn == "Y") || (menuJson.menu[i].urLgnYn == "N")) {
+			// 채널구분
+			if(menuJson.menu[i].bultChnlMobWebYn == "Y" && menuJson.menu[i].expsYn == "Y") {
+				// depth1 - 비로그인 / 준정노출여부 확인
+				if (lgnYn == "N" || (lgnYn == "Y" && mbrType == "MBR" && menuJson.menu[i].rgmExpsYn == "Y") || (lgnYn == "Y" && mbrType == "JUN" && menuJson.menu[i].aomExpsYn == "Y")) {
+					
+					if (typeof memNm == "undefined" || memNm == "") {
+						if (i == 0) {
+							ariaExpandedDep1 = "true";
+						} else {
+							ariaExpandedDep1 = "false";
+						}
+					} else {
+						if (menuJson.menu[i].locaMenIdNm == memNm) {
+							ariaExpandedDep1 = "true";
+						} else {
+							ariaExpandedDep1 = "false";
+						}
+					}
+					
+					// depth1 - draw
+					menuHTML += '<li><span>' + menuJson.menu[i].locaMenIdNm + '</span></li>';
+					
+					// depth2 - 시작
+					if(menuJson.menu[i].sub != null && menuJson.menu[i].sub != "") {
+						
+						if(i == 0) {
+							subMenuHTML += '<div class="depth2-section">';
+						} else {
+							subMenuHTML += '<div class="depth2-section">';
+						}
+						
+						for(var j = 0; j < menuJson.menu[i].sub.length; j++) {
+							subMenuHTML += '	<div class="depth2-group">';
+							// depth2 - 로그인 여부 확인
+							// if((menuJson.menu[i].sub[j].urLgnYn == "Y" && lgnYn == "Y") || (menuJson.menu[i].sub[j].urLgnYn == "N")) {
+								// depth2 - 채널구분 여부
+								if(menuJson.menu[i].sub[j].bultChnlMobWebYn == "Y" && menuJson.menu[i].sub[j].expsYn == "Y") {
+									// depth2 - 비로그인 / 준정노출여부 확인
+									if(lgnYn == "N" || (lgnYn == "Y" && mbrType == "MBR" && menuJson.menu[i].sub[j].rgmExpsYn == "Y") || (lgnYn == "Y" && mbrType == "JUN" && menuJson.menu[i].sub[j].aomExpsYn == "Y")) {
+										
+										var link = menuJson.menu[i].sub[j].locaMenUrl;
+										
+										if (i == 0 && j == 0) {
+											ariaExpandedDep2 = "true";
+										} else {
+											ariaExpandedDep2 = "false";
+										}
+										
+										if ( link == null || link == "" || typeof link == "undefined") {		// depth2 - link 없는 경우
+											link = "#";
+											subMenuHTML += '		<h2 class="depth2-title">' + menuJson.menu[i].sub[j].locaMenIdNm + '</h2>';
+										} else {																// depth2 - link 있는 경우
+											subMenuHTML += '			<ul class="depth2-list pt15">'; 
+											subMenuHTML += '				<li>';
+											subMenuHTML += '					<a id="' + menuJson.menu[i].sub[j].locaMenId + '" class="ga-click" role="link" aria-expanded="' + ariaExpandedDep2 + '" onclick=\"cmnMenuLink(\'' + menuJson.menu[i].sub[j].locaMenHlkDc + '\', \'' + menuJson.menu[i].sub[j].locaMenUrl + '\', \'' + menuJson.menu[i].sub[j].locaMenId + '\', \'' + menuJson.menu[i].sub[j].locaMenIdNm + '\', \'' + menuJson.menu[i].sub[j].urLgnYn + '\');\">' + menuJson.menu[i].sub[j].locaMenIdNm;
+											subMenuHTML += '				</a></li>';
+											subMenuHTML += '			</ul>';
+										}
+										
+										// depth2 - draw
+										// subMenuHTML += '		<div class="depth2-title" onclick=\"cmnMenuLink(\'' + menuJson.menu[i].sub[j].sub[k].locaMenHlkDc + '\', \'' + menuJson.menu[i].sub[j].sub[k].locaMenUrl + '\', \'' + menuJson.menu[i].sub[j].sub[k].locaMenId + '\', \'' + menuJson.menu[i].sub[j].sub[k].locaMenIdNm + '\');\">' + menuJson.menu[i].sub[j].locaMenIdNm + '</div>';
+										
+										// depth3 - 시작
+										if(menuJson.menu[i].sub[j].sub != null && menuJson.menu[i].sub[j].sub != "") {
+											subMenuHTML += '		<ul class="depth2-list">';
+											
+											for(var k = 0; k < menuJson.menu[i].sub[j].sub.length; k++) {
+												var link = menuJson.menu[i].sub[j].sub[k].locaMenUrl;
+												
+												if (i == 0 && j == 0) {
+													ariaExpandedDep2 = "true";
+												} else {
+													ariaExpandedDep2 = "false";
+												}
+												
+												if ( link == null || link == "" || typeof link == "undefined") {
+													link = "#";
+												}
+												
+												// depth3 - 로그인 여부 확인
+												// if((menuJson.menu[i].sub[j].sub[k].urLgnYn == "Y" && lgnYn == "Y") || (menuJson.menu[i].sub[j].sub[k].urLgnYn == "N")) {
+													// 채널구분
+													if(menuJson.menu[i].sub[j].sub[k].bultChnlMobWebYn == "Y"  && menuJson.menu[i].sub[j].sub[k].expsYn == "Y") {
+														// depth3 - 비로그인 / 준정노출여부 확인
+														if(lgnYn == "N" || (lgnYn == "Y" && mbrType == "MBR" && menuJson.menu[i].sub[j].sub[k].rgmExpsYn == "Y") || (lgnYn == "Y" && mbrType == "JUN" && menuJson.menu[i].sub[j].sub[k].aomExpsYn == "Y")) {
+															// depth3 - draw
+															subMenuHTML += '		<li>';
+															// subMenuHTML += '			<a id="' + menuJson.menu[i].sub[j].sub[k].locaMenId + '" aria-expanded="' + ariaExpandedDep2 + '" onclick=\"cmnMenuLink(\'' + utlf_EncodeTag(JSON.stringify(menuJson.menu[i].sub[j].sub[k])) + '\');\">' + menuJson.menu[i].sub[j].sub[k].locaMenIdNm;
+															subMenuHTML += '			<a id="' + menuJson.menu[i].sub[j].sub[k].locaMenId + '" class="ga-click" role="link" aria-expanded="' + ariaExpandedDep2 + '" onclick=\"cmnMenuLink(\'' + menuJson.menu[i].sub[j].sub[k].locaMenHlkDc + '\', \'' + menuJson.menu[i].sub[j].sub[k].locaMenUrl + '\', \'' + menuJson.menu[i].sub[j].sub[k].locaMenId + '\', \'' + menuJson.menu[i].sub[j].sub[k].locaMenIdNm + '\', \'' + menuJson.menu[i].sub[j].sub[k].urLgnYn + '\');\">' + menuJson.menu[i].sub[j].sub[k].locaMenIdNm;
+															// 배지(new/update) 존재 여부 확인
+															if(menuJson.menu[i].sub[j].sub[k].bdgeDc == "2") {
+																subMenuHTML += '		<span class="flag flag-coral flag-sm">new</span>';
+															} else if(menuJson.menu[i].sub[j].sub[k].bdgeDc == "3") {
+																subMenuHTML += '		<span class="flag flag-blue flag-sm">업데이트</span>';
+															}
+															
+															subMenuHTML += '		</a></li>';
+														}
+													}
+												// }
+											}
+											
+											subMenuHTML += '		</ul>';
+										}
+									}
+								}
+							// }
+							subMenuHTML += "	</div>";
+						}
+						
+						
+						subMenuHTML += "</div>";
+						$(".depth2").append(subMenuHTML);
+						subMenuHTML = "";
+					}
+				}
+			}
+		// }
+	}
+
+	menuHTML += '</div>';
+	menuHTML += '</ul>';
+	
+	$(".depth1-menu").append(menuHTML);
+	menuHTML = "";
+	
+	LOCA2_UI.init();
+	LocaGnb();
+}
+
+function fnDivrMenuSetting(data){
+	//메뉴 조회 콜백 function
+	var lgnYn = "N";
+	// 로그인 여부 체크
+	if(false) {
+		lgnYn = "Y";
+	}
+	
+	// 기초데이터 설정
+	var locaYn = "";
+	var locaForYn = "";
+	var lolaYn = "";
+	var menuJson = data;
+	var menuHTML = "";
+	var subMenuHTML = "";
+	var ariaExpandedDep1 = "false";
+	var ariaExpandedDep2 = "false";
+	var chkUrl = "";
+	
+	var memNm = "";
+	var mbrType = "";
+	var mbrType2 = ""; 		// 회원유형
+	
+	// 210726 : CMI : 최근 메뉴  - 로그인/비로그인 구분 추가	
+	var key = "";
+	
+	key += "_recentlyMenus";
+	
+	// 2021.06.15 CSR-62761 발급전용일땐 카드신청 관련 외 미노출
+	var sNum = 0;
+	var eNum = Object.keys(menuJson.menu).length;
+	if ("" == "4"){
+		sNum = 2;
+		eNum = 3;
+	}
+	
+	menuHTML += '<div class="scroll-x">';
+	menuHTML += '<ul class="menu-list">';
+	
+	if("" != "4"){
+	// 최근 이용 내역
+		if((window.localStorage.getItem(key) != null && window.localStorage.getItem(key) != "")) {
+			var menuArr = [];
+			menuArr = JSON.parse(window.localStorage.getItem(key));
+			
+			menuHTML += '<li><span>최근</span></li>';
+			
+			subMenuHTML += '<div class="depth2-section">';
+			subMenuHTML += '	<div class="depth2-group">';
+			subMenuHTML += '		<h2 class="depth2-title" href="#">최근이용 메뉴</h2>';
+			subMenuHTML += '		<ul class="depth2-list">';
+			
+			// 최근 이용 메뉴 draw
+			for(var l = menuArr.length-1; l >= 0; l--) {
+				subMenuHTML += '			<li>';
+				subMenuHTML += '				<a onclick=\"cmnMenuLink(\'1\', \'' + menuArr[l].locaMenUrl + '\', \'' + menuArr[l].locaMenId + '\', \'' + menuArr[l].locaMenIdNm + '\', \'' + menuArr[l].urLgnYn + '\');\" id="' + menuArr[l].locaMenId + '" role="link" aria-expanded="' + ariaExpandedDep2 + '">' + menuArr[l].locaMenIdNm + '</a>';
+				subMenuHTML += '			</li>';
+			}
+			
+			subMenuHTML += '		</ul>';
+			subMenuHTML += '	</div>';
+			subMenuHTML += '</div>';
+		}
+	}
+	for(var i = sNum; i < eNum; i++) {
+		if(menuJson.menu[i].expsYn == "Y") {
+			if (typeof memNm == "undefined" || memNm == "") {
+				if (i == 0) {
+					ariaExpandedDep1 = "true";
+				} else {
+					ariaExpandedDep1 = "false";
+				}
+			} else {
+				if (menuJson.menu[i].menNm == memNm) {
+					ariaExpandedDep1 = "true";
+				} else {
+					ariaExpandedDep1 = "false";
+				}
+			}
+			
+			// depth1 - draw
+			menuHTML += '<li><span>' + menuJson.menu[i].menNm + '</span></li>';
+		
+				
+				
+			// depth2 - 시작
+			if(menuJson.menu[i].sub != null && menuJson.menu[i].sub != "") {
+			
+				subMenuHTML += '<div class="depth2-section">';
+			
+				for(var j = 0; j < menuJson.menu[i].sub.length; j++) {
+					subMenuHTML += '	<div class="depth2-group">';
+					// depth2 - 채널구분 여부
+					if(menuJson.menu[i].sub[j].expsYn == "Y") {
+						var link = menuJson.menu[i].sub[j].link;
+							
+						if (i == 0 && j == 0) {
+							ariaExpandedDep2 = "true";
+						} else {
+							ariaExpandedDep2 = "false";
+						}
+							
+						if ( link == null || link == "" || typeof link == "undefined") {		// depth2 - link 없는 경우
+							link = "#";
+							subMenuHTML += '		<h2 class="depth2-title">' + menuJson.menu[i].sub[j].menNm + '</h2>';
+						} else {																// depth2 - link 있는 경우
+							subMenuHTML += '			<ul class="depth2-list pt15">'; 
+							subMenuHTML += '				<li>';
+							subMenuHTML += '					<a id="' + menuJson.menu[i].sub[j].menId + '" class="ga-click" role="link" aria-expanded="' + ariaExpandedDep2 + '" onclick=\"cmnMenuLink(\'1\', \'' + menuJson.menu[i].sub[j].link + '\', \'' + menuJson.menu[i].sub[j].menId + '\', \'' + menuJson.menu[i].sub[j].menNm + '\', \'' + menuJson.menu[i].sub[j].lgnYn + '\');\">' + menuJson.menu[i].sub[j].menNm;
+							subMenuHTML += '				</a></li>';
+							subMenuHTML += '			</ul>';
+						}
+							
+						// depth3 - 시작
+						if(menuJson.menu[i].sub[j].sub != null && menuJson.menu[i].sub[j].sub != "") {
+							subMenuHTML += '		<ul class="depth2-list">';
+								
+							for(var k = 0; k < menuJson.menu[i].sub[j].sub.length; k++) {
+								var link = menuJson.menu[i].sub[j].sub[k].link;
+								
+								if (i == 0 && j == 0) {
+									ariaExpandedDep2 = "true";
+								} else {
+									ariaExpandedDep2 = "false";
+								}
+									
+								if ( link == null || link == "" || typeof link == "undefined") {
+									link = "#";
+								}
+									
+								// 채널구분
+								if(menuJson.menu[i].sub[j].sub[k].expsYn == "Y") {
+									var chkUrl =  menuJson.menu[i].sub[j].sub[k].link.replaceAll("/app/","").replaceAll(".lc","");	
+										
+									// depth3 - draw
+									subMenuHTML += '		<li>';
+									// subMenuHTML += '			<a id="' + menuJson.menu[i].sub[j].sub[k].locaMenId + '" aria-expanded="' + ariaExpandedDep2 + '" onclick=\"cmnMenuLink(\'' + utlf_EncodeTag(JSON.stringify(menuJson.menu[i].sub[j].sub[k])) + '\');\">' + menuJson.menu[i].sub[j].sub[k].locaMenIdNm;
+									if ( 'false' != 'true' && '' == 'true' && menuJson.menu[i].sub[j].sub[k].lgnYn == "N") {
+										subMenuHTML += '			<a id="#" class="ga-click" role="link" aria-expanded="' + ariaExpandedDep2 + '" onclick=\"fnGoNonAuthUrl(\'' + menuJson.menu[i].sub[j].sub[k].link + '\');\">' + menuJson.menu[i].sub[j].sub[k].menNm;
+									} else {
+										subMenuHTML += '			<a id="' + menuJson.menu[i].sub[j].sub[k].menId + '" class="ga-click" role="link" aria-expanded="' + ariaExpandedDep2 + '" onclick=\"cmnMenuLink(\'1\', \'' + menuJson.menu[i].sub[j].sub[k].link + '\', \'' + menuJson.menu[i].sub[j].sub[k].menId + '\', \'' + menuJson.menu[i].sub[j].sub[k].menNm + '\', \'' + menuJson.menu[i].sub[j].sub[k].lgnYn + '\');\">' + menuJson.menu[i].sub[j].sub[k].menNm;
+									}
+									// 배지(new/update) 존재 여부 확인
+									/* if(menuJson.menu[i].sub[j].sub[k].bdgeDc == "2") {
+										subMenuHTML += '		<span class="flag flag-coral flag-sm">new</span>';
+									} else if(menuJson.menu[i].sub[j].sub[k].bdgeDc == "3") {
+										subMenuHTML += '		<span class="flag flag-blue flag-sm">업데이트</span>';
+									} */
+												
+									subMenuHTML += '		</a></li>';
+								}
+							}
+							
+							subMenuHTML += '		</ul>';
+						}
+					}
+				subMenuHTML += "	</div>";
+				}
+		
+				subMenuHTML += "</div>";
+				$(".depth2").append(subMenuHTML);
+				subMenuHTML = "";
+			}
+		}
+	}
+		
+	menuHTML += '</div>';
+	menuHTML += '</ul>';
+	
+	if("" != "4"){
+		$(".depth1-menu").append(menuHTML);
+	}
+	
+	menuHTML = "";
+	LOCA2_UI.init();
+	LocaGnb();
+}
+
+// 메뉴 이벤트 function
+function LocaGnb() {
+	const gnbBtn = $('.btn-hamberger'),
+		gnbLayer = $('.gnb-layer'),
+		gnbClose = $('.btn-close'),
+		depth1Wrap = $('.depth1-menu'),
+		btnToggle = $('.depth1-menu .btn-toggle');
+
+	this.eventBind = function() {
+		this.gnbControl();
+		this.depth1Extend();
+	}
+
+	this.gnbControl = function() {
+		gnbBtn.on('click', function() {
+			GA_Virtual_Event("전체메뉴", "DM_2");
+			gnbLayer.addClass('show');
+ 			$("html").css({"height":"100vh"});
+            let wScrollTop = $(window).scrollTop();
+            $('body').addClass('scrollOff');
+            $('.loca-wrapper').addClass('scrollOff').scrollTop(wScrollTop);
+		});
+		gnbClose.on('click', function() {
+			gnbLayer.removeClass('show');
+			$("html").css({"height":""});
+            let wScrollTop = $('.loca-wrapper.scrollOff').scrollTop();
+            $('body, .loca-wrapper').removeClass('scrollOff');
+            $(window).scrollTop(wScrollTop);
+		});
+	}
+	
+	this.depth1Extend = function() {
+		gradientLayer = document.createElement('div');
+		gradientLayer.className = 'gradient-layer';
+		depth1Wrap.append(gradientLayer);
+
+		btnToggle.on('click', function(e) {
+			var tmpTarget = e.currentTarget;
+			
+			if(depth1Wrap.hasClass('is-active')){
+				tmpTarget.setAttribute('aria-expanded', 'false');
+				tmpTarget.parentNode.classList.remove('is-active');
+				tmpTarget.parentNode.appendChild(gradientLayer);
+			}else{
+				tmpTarget.setAttribute('aria-expanded', 'true');
+				tmpTarget.parentNode.classList.add('is-active');
+				tmpTarget.parentNode.removeChild(gradientLayer);
+			}
+		})
+		
+	}
+
+	this.init = function() {
+		this.eventBind();
+	}
+	this.init();
+}
+
+// 로그아웃 function => spa 메인 이동
+function cmnDoLogout() {
+	svcf_Ajax("/app/api/LPMBRAB_A200.lc", function() {
+		svcf_Link("/app/LPMAIAA_V100.lc");
+	});
+}
+
+// 검색 페이지 이동 function
+function cmnGoSrchPage() {
+	var isDiv = "false";
+	if(isDiv == "true") {
+		svcf_Link('/app/LPSCHBB_V200.lc?searchText=' + encodeURIComponent($('#txt_searchText').val()));
+		$('#txt_searchText').val('');
+	} else{
+		svcf_Link("/app/LPSCHBA_V100.lc");
+	}
+	
+}
+
+//회원가입 페이지 이동 function
+function cmnGoJoinPage() {
+	svcf_Link("/app/LPMBRAA_V100.lc");
+}
+
+// 로그인 페이지 이동 function
+function cmnGoLoginPage() {
+	svcf_Link("/app/LPMBRAB_V100.lc");
+}
+
+function cmnMenuLink(locaMenHlkDc, locaMenUrl, locaMenId, locaMenIdNm, urLgnYn) {
+	
+	recentMenu = [];
+	
+	// 210726 : CMI : 최근 메뉴  - 로그인/비로그인 구분 추가
+	var key = "";
+	key += "_recentlyMenus"
+	
+	// 로컬 스토리지 배열에 push
+	if (window.localStorage.getItem(key) != null) {
+		for (var m = 0; m < JSON.parse(window.localStorage.getItem(key)).length ; m++) {
+			recentMenu.push(JSON.parse(window.localStorage.getItem(key))[m]);
+		}
+	}
+	
+	// 로컬 스토리지 삭제
+	window.localStorage.removeItem(key);
+
+	// 중복 메뉴 체크
+	for(var n = 0; n < recentMenu.length; n++) {
+		if (locaMenId == recentMenu[n].locaMenId) {
+			recentMenu.splice(n, 1);
+		}
+	}
+	
+	// 최근 이용 메뉴 갯수 확인
+	if(recentMenu.length >= 3) {
+		recentMenu.splice(0, 1);
+	}
+	
+	// array push
+	recentMenu.push({
+		"locaMenHlkDc" : locaMenHlkDc,
+		"locaMenUrl" : locaMenUrl,
+		"locaMenId" : locaMenId,
+		"locaMenIdNm" : locaMenIdNm,
+		"urLgnYn" : urLgnYn,
+		"date" : new Date()
+	});
+
+	window.localStorage.setItem(key, JSON.stringify(recentMenu));
+	
+	if(locaMenId == "center_service04" || locaMenId == "CS_293") {			// 210726 : CMI : 챗봇
+		goChatBot();
+		$('.chatbotCon').fadeIn(400);
+	} else if (locaMenHlkDc == "1") {			// 210721 : CMI : 내부 링크
+		var moveUrl = locaMenUrl;
+		if (urLgnYn == "Y") {
+			if (false != true) {
+				moveUrl = "/app/LPMBRAB_V100.lc?reUrl=" + locaMenUrl;
+			}
+		}
+	
+		
+		if ("false" == "true"){
+			moveTelDisconnect('svcf_Link', moveUrl);
+		} else {
+			svcf_Link(moveUrl);
+		}
+	} else if (locaMenHlkDc == "2") {			// 210721 : CMI : 외부 링크
+		
+		if ("false" == "true"){
+			moveTelDisconnect('loca_OpenBrowser', locaMenUrl);
+		} else {
+			svcf_Link(locaMenUrl, "", "_blank");
+		}
+	}
+}
+</script>
+<!-- depth1 //-->
+	<form>
+	
+	</form>
+   <!--  <article id="popup_full" class="popup-layer popup-full"> -->
+
+		<!-- <div class="loca-wrapper"> -->
+		<!-- <div class="main-wrapper"> -->
+			<!-- header --> 
+			<!-- <header id="main_header" class="main-header"> -->
+                <!-- <button type="button" class="btn-hamberger" id="btn_99">전체메뉴 열기</button> -->
+				<!-- 전체메뉴 -->
+				<div class="popup-layer popup-full gnb-layer">
+					<div class="popup-header">
+						<!-- app bars -->
+						<div class="menu-utils">
+							
+								
+									<button type="button" class="btn-close ga-click" data-close="false" id="btn_99">전체메뉴 닫기</button>
+								
+								
+							
+							<a href="javascript:void(0);" id="lnk_96" class="btn-search d-none"><i class="custom-icon icon-search-dark ga-click" onclick="cmnGoSrchPage();"></i><span class="sr-only">검색페이지로 이동</span></a>
+							<button type="button" class="btn-home ga-click" data-close="false" id="btn_97" onclick="svcf_Link('/app/LPMAIAA_V100.lc');">메인화면</button>
+						</div>
+						<!-- //app bars -->
+					</div>
+
+					<div class="popup-content">
+						<!-- gnb content -->
+						<div class="gnb-wrapper">
+							
+								
+								
+									<!-- 비로그인 -->
+									<div class="gnb-head">
+										
+											
+											
+												<div class="gnb-message">
+													로그인 후 <br>
+													이용해 주세요
+												</div>
+												<div class="gnb-actions">
+													<a href="javascript:void(0)" class="btn btn-xs btn-round btn-border ga-click" id="btn_a-03" onclick="cmnGoJoinPage();">회원가입</a>
+													<a href="javascript:void(0)" class="btn btn-xs btn-round btn-border ga-click" id="btn_a-04" onclick="cmnGoLoginPage();">로그인</a>
+												</div>
+											
+										
+									</div>
+									<!-- //비로그인 -->
+								
+							
+							<!-- 검색 -->
+							<!-- src/spa/pub-guide/04_pattern/search.html -->
+							
+								
+								
+									<div class="gnb-search" onclick="cmnGoSrchPage();">
+									<div class="search-form">
+										<div class="form-content form-control">                        
+											<div class="form-control-clear d-block">
+												<input type="text" class="custom-input input-block input-clear ga-click" id="txt_001" title="검색 키워드 입력" placeholder="메뉴, 카드, 혜택 등을 찾아보세요" readonly="readonly" style="background-color: #ffffff">
+												<button type="button" class="btn btn-input-clear btn-icon-only icon-clear ga-click" id="btn_001">필드값 삭제</button>              
+											</div>
+											<button type="submit" class="btn-transparent btn-search ga-click" ><i class="custom-icon icon-search-dark"></i><span class="sr-only">검색하기</span></button>
+										</div>
+									</div>
+								</div>
+								
+							
+							<!--// src/spa/pub-guide/04_pattern/search.html -->
+							<!-- //검색 -->
+	
+							<!-- gnb -->
+							<nav class="gnb-content">
+								<!-- 1depth 메뉴 -->
+								<div class=" depth1 type-scroll menu-sticky">
+									<div class="depth1-menu">
+										<button type="button" class="btn-toggle ga-click" id="btn_01" aria-expanded="false">펼치기</button>
+									</div>
+								</div>
+								<!--// depth1 -->
+								<!-- depth2 //-->
+								<div class="depth2">
+									
+								</div>
+								<!--// depth2 -->
+							</nav>
+							<!-- //gnb -->
+							
+							<!-- gnb footer -->
+							
+								
+								
+									<div class="gnb-footer">
+										<div class="gnb-footer-site">
+											<a href="https://mc.lottecard.co.kr/" title="링크 이동" id="lnk_c-01" class="divider ga-click">법인사이트 <i class="custom-icon icon-arrow-link"><span class="sr-only">아이콘</span></i></a>
+											
+										</div>
+										<div class="gnb-footer-site">
+											<div class="gnb-footer-title">롯데카드 채널</div>
+											<div class="gnb-footer-channel">
+												<a href="https://www.youtube.com/user/lottecard1" title="링크 이동" id="lnk_c-01" class="ga-click"><i class="custom-icon icon-c-youtube"><span class="sr-only">유튜브</span></i></a>
+												<a href="https://www.facebook.com/lottecard" title="링크 이동" id="lnk_c-02" class="ga-click"><i class="custom-icon icon-c-facebook"><span class="sr-only">페이스북</span></i></a>
+												<a href="https://www.instagram.com/lottecard.official/" title="링크 이동" id="lnk_c-03" class="ga-click"><i class="custom-icon icon-c-instar"><span class="sr-only">인스타그램</span></i></a>
+												<a href="http://pf.kakao.com/_WsUqxl" title="링크 이동" id="lnk_c-04" class="ga-click"><i class="custom-icon icon-c-kakao"><span class="sr-only">카카오</span></i></a> <!-- 21-08-19 PJ11-22918 카카오톡 링크 추가 -->
+												<a href="https://blog.naver.com/lottecard_blog" title="링크 이동" id="lnk_c-04" class="ga-click"><i class="custom-icon icon-c-blog"><span class="sr-only">블로그</span></i></a>
+											</div>
+										</div>
+										
+										
+										
+										
+										
+										
+											<!-- <iframe name="chatbotFrame" id="chatbotFrame" src="" title="챗봇채팅창 iframe" scrolling="no" frameborder="0" class="chatbotCon"></iframe> -->
+											
+										<!-- </div> -->
+										
+										
+										
+										
+										<div class="cbFloating" title="챗봇 로카" id="chatopenW">
+											<div class="cbSlider">
+												<button><img src="//image.lottecard.co.kr/webapp/pc/images/etc/floating_close.png" alt="플로팅 닫기" class="ga-click"></button>
+												<img src="//image.lottecard.co.kr/webapp/pc/images/etc/cb_floating_01.png" alt="챗봇 플로팅 이미지" class="ico chatImage" ><!-- ladm image class big add -->
+												<ul class="letter ga-click" id="lpmaiaav100_chatbot_btnchatbot1" onclick="goChatBotBnn(); GA_Event('FOOTER','챗봇','클릭'); return false"><!-- ladm data add -->
+													<li class="active">반가워요</li>
+								 					<li>무엇을 도와드릴까요?</li>
+												</ul>
+											</div>
+										</div>
+										
+										
+										
+										<div class="cbWrap" id="chatcloseW" style="display:none;">
+											<a href="#" id="env_set" onclick="WindowClose2(); return false;" class="chatbotImg_v2 ga-click">
+												<img src="//image.lottecard.co.kr/webapp/mobile/images/etc/loca_back.png" alt="대화계속해요" />
+											</a>
+										</div>
+										
+									</div>
+								
+								
+							
+							
+
+
+
+
+
+
+
+<form id="chatform" name="chatform">
+	<input type="hidden" id="cno" name="cno" /> 
+	<input type="hidden" id="vipYn" name="vipYn" /> 
+	<input type="hidden" id="sysGb" name="sysGb" /> 	
+	<input type="hidden" id="scenVal" name="scenVal" />
+	<input type="hidden" id="prexam" name="prexam" />
+	<input type="hidden" id="cardCd" name="cardCd" />
+	<input type="hidden" id="b_id" name="b_id" />
+	<input type="hidden" id="roomid" name="roomid" />
+	<input type="hidden" id="nversion" name="nversion" value="2000"/>
+</form>
+
+<div class="time"></div>
+<script type="text/javascript">
+var checkUrl = "http://m.lottecard.co.kr/app/app/LPMBRAB_V100.lc";
+
+var scenVal = "";
+//챗봇 카드신청관련 추가
+var chatCardAplYn = false;
+var chatVt_cd_knd_c = '';
+
+var ischatbotFrameOpened = false;
+var isLogin = false;
+
+function goChatBot() {
+	var f = document.chatform;
+	
+	document.domain = "lottecard.co.kr";
+	
+	if(!isLogin) {
+		
+		if(!ischatbotFrameOpened) {
+			var result = svcf_AjaxParam("/app/api/LPCMNJA_A000.lc", "c=1", {
+				async: false
+			});
+			svcf_SyncCallbackFn(result, chatBotCallback);
+		} else {
+			if (typeof scenVal != "undefined"){
+				scenVal = "";
+				
+			}
+			ischatbotFrameOpened = true;
+		}
+
+	} else {
+		var result = svcf_AjaxParam("/app/api/LPCMNJA_A000.lc", "c=1", {
+			  async: false
+		});
+		
+		svcf_SyncCallbackFn(result, chatBotCallback);
+	}
+	
+}
+		
+//210805 : CMI : chatbot close function
+function ChatClose(sessionChange) {
+
+	ischatbotFrameOpened = false;
+
+	document.domain = "lottecard.co.kr";
+
+	var cbC = $('.chatbotCon');
+	cbC.hide();
+
+	//챗봇 닫을 때, 바닥페이지 스크롤 켜기  0716 김예진 추가
+	$("body").css("overflow","").css("position","");
+
+	// $('.chatbotBtn').show();
+	$('.navi_wrap').removeClass('on');
+	if(sessionChange){
+		location.reload();
+	}
+}
+		
+var chatbotEventListenerMessage = true;
+
+function chatBotCallback(status, data){
+	var f = document.chatform;
+	
+	var pScenVal = "";
+	var pPrexam = "";
+	var pb_id = "";
+	var roomid = "";
+	
+	console.log("pb_id :"+pb_id);
+	if (status.code != 0) {
+		utlf_AlertMsg('챗봇', status.message.replaceAll("<br/>", "\n"));
+		return;
+	}		   
+	
+	f.cno.value = data.resVO.cno;
+	f.vipYn.value = data.resVO.vipYn;
+	f.sysGb.value = "LP";
+	f.scenVal.value = scenVal;
+	f.target="chatbotFrame";
+	f.roomid.value = roomid;
+	
+	if(chatCardAplYn) {
+		f.scenVal.value = "lottecard00013";
+		f.cardCd.value = chatVt_cd_knd_c;
+	}
+	
+    if(pScenVal != "") {
+		f.scenVal.value = pScenVal;
+    }
+    if(pPrexam != "") {
+		f.prexam.value = pPrexam;
+    }
+    if(pb_id != "") {
+		f.b_id.value = pb_id;
+    }
+    
+    var tmpUrl = "https://cb.lottecard.co.kr";
+    
+    console.log(" ##### tmpUrl : " + tmpUrl);
+   
+    f.action= "https://cb.lottecard.co.kr/chatbot";
+	f.method = "post";
+	f.submit();
+	if (typeof scenVal != "undefined"){
+		scenVal = "";
+	
+	}
+	
+	//챗봇 열 때 바닥페이지 스크롤 막기 0716 김예진 추가 
+	$("body").css("overflow","hidden").css("position","fixed");
+
+	ischatbotFrameOpened = true;
+	
+	if(chatbotEventListenerMessage){
+		chatbotEventListenerMessage =  window.addEventListener("message", function(e){
+			window.scrollTo(0,0);
+		});
+	}
+}
+
+function goChatBotScen(scenVal) {
+	
+	var 	f = document.chatform;
+	
+	document.domain = "lottecard.co.kr";
+	
+	if(!isLogin) {
+		
+		if(!ischatbotFrameOpened){
+			var result = svcf_AjaxParam("/app/api/LPCMNJA_A000.lc", "c=1", {
+				async: false
+			});
+			
+			
+			svcf_SyncCallbackFn(result, chatBotScenCallback);
+
+		}else{
+			if (typeof scenVal != "undefined"){
+				scenVal = "";
+			
+			}
+			ischatbotFrameOpened = true;
+		}
+
+	}else{
+		var result = svcf_AjaxParam("/app/api/LPCMNJA_A000.lc", "c=1", {
+			  async: false
+		});
+		
+		svcf_SyncCallbackFn(result, chatBotScenCallback);
+	}
+	
+}
+
+function chatBotScenCallback(status, data){
+
+
+	var f = document.chatform;
+	
+	var pScenVal = "";
+	var pPrexam = "";
+	var pb_id = "";
+	var roomid = "";
+	console.log("pb_id :"+pb_id);
+	console.log("pScenVal :"+pScenVal);
+	console.log("scenVal :"+scenVal);
+	console.log("chatScenVal :"+chatScenVal);
+	if (status.code != 0) {
+		utlf_AlertMsg('챗봇', status.message.replaceAll("<br/>", "\n"));
+		return;
+	}		   
+	
+	f.cno.value = data.cno;
+	f.vipYn.value = data.vipYn;
+	f.sysGb.value = "LP";
+	f.scenVal.value = chatScenVal;
+	f.target="chatbotFrame";
+	f.roomid.value = roomid;
+	
+	if(chatCardAplYn) {
+		f.scenVal.value = "lottecard00013";
+		f.cardCd.value = chatVt_cd_knd_c;
+	}
+	
+    f.action=  "https://cb.lottecard.co.kr/chatbot"
+	f.method = "post";
+	f.submit();
+	if (typeof scenVal != "undefined"){
+		scenVal = "";
+	
+	}
+	
+	//챗봇 열 때 바닥페이지 스크롤 막기 0716 김예진 추가 
+	$("body").css("overflow","hidden").css("position","fixed");
+
+	ischatbotFrameOpened = true;
+	
+	if(chatbotEventListenerMessage){
+		chatbotEventListenerMessage =  window.addEventListener("message", function(e){
+			window.scrollTo(0,0);
+		});
+	}
+}
+function goChatBotCardApl(vt_cd_knd_c) {
+	
+	var 	f = document.chatform;
+	
+	document.domain = "lottecard.co.kr";
+	
+	chatCardAplYn = true;
+	chatVt_cd_knd_c = vt_cd_knd_c;
+	
+	var result = svcf_AjaxParam("/app/api/LPCMNJA_A000.lc", "c=1", {
+		async: false
+	});
+	
+	svcf_SyncCallbackFn(result, chatBotCallback);	
+}
+function chatbotLoginTimeEx(param, cbfunc) {
+	try {
+		sessionEnd = sessionInterval + new Date().getTime();
+		clockCheck = false;
+		loginCheck = false;
+		$("#remindSection").html("");
+	} catch (e) {
+	}
+	
+	var paramStr = "";
+	for(var att in param){
+		if(paramStr) paramStr += "&";
+		paramStr += att + "=" + param[att];
+	}
+	ComnReqExitYn = true;
+	svcf_AjaxParam('/app/api/LPCMNJA_A001.lc', paramStr, {
+		callbackFn : function (status, data) {
+			if (status.code != 0) {
+				ChatClose();
+				loca_Alert({msg: utlf_Nl2br(status.message), callbackFn: function() {
+					svcf_Link("/app/LPMAIAA_V100.lc");
+				}})
+			}
+			cbfunc(data);
+		}
+	});
+	ComnReqExitYn = false;
+}
+
+</script> 
+							<!-- //gnb footer -->
+						</div>
+						<!-- //gnb content -->
+					</div>
+				</div>
+				<!-- //전체메뉴 -->
+            <!-- </header> -->
+			<!-- //header -->
+
+	<!-- 	</div> -->
+	<!-- </div> -->
+
+	<!-- </article> -->
+	
+<script>
+function textStop(){
+	clearInterval(autoState);
+	textList[counts].classList.remove('active');
+};
+
+
+</script>
+
+
+								</div>
+							</header>
+						
+						
+					
+				
+			
+			
+			
+			
+			<main id="sub_container" class="sub-container " ga-category="회원" ga-view-name="로그인" ga-view-id="MB_6">
+				
+
+
+
+<style type="text/css">
+/* 210812 : CMI : ID/PW 로그인 PW input box css 추가 */
+#mbrCtfEncV {
+	color: #222 !important;
+    background-color: #fff !important;
+    border-color: #f3f3f3 !important;
+}
+</style>
+<script type="text/javascript">
+$(function() { 
+	iTracerAF.init(function(data) {
+ 		$('input#wdata').val(data.wdata);
+ 	});
+	
+	
+	
+	$("#inputDate1").on("change", function() {
+		this.setAttribute("data-date", this.value = new Date(this.value).format("yyyy-MM-dd"));
+		this.value = new Date(this.value).format("yyyy-MM-dd");
+	});
+	
+	// 210916 : CMI : 금융 로그인 케이스 추가
+	if($("#reUrl").val().indexOf("/spa/finance/marketing/ableInfo") != -1) {
+		var finaReUrl = $("#reUrl").val() + "&micaYn=" + "";
+		console.log("fina :: " + finaReUrl);
+		$("#reUrl").val(finaReUrl);
+	}
+	
+	// 211016 : CMI : samsungpay 케이스 추가
+	if($("#login_type").val().indexOf("samsungpay") != -1) {
+		$("#login_type").val("samsungpay");
+		
+		//var samsungpayReUrl = $("#reUrl").val();
+		console.log("samsungpay :: " + $("#reUrl").val() + "?type=" + $("#login_type").val() + "&pdc=" + "");
+		var tmpReUrl = $("#reUrl").val() + "?type=" + $("#login_type").val() + "&pdc=" + "";
+		$("#reUrl").val(tmpReUrl);
+	}
+	
+/* 	$("#mbrCtfDrmId").on("focus", function() {
+		$("#mbrCtfDrmId").attr("type", "email");
+	});
+	
+	$("#mbrCtfDrmId").on("focusout", function() {
+		$("#mbrCtfDrmId").attr("type", "text");
+	}); */
+});
+
+// ==================== 팝업 ====================
+function fnPopChnPw() {
+	loca_Alert({title: "비밀번호 변경 안내"
+		, msg: "<div class='copy-text-wrap text-lg'><p><strong class='text-lg'>비밀번호를 변경해 주세요</strong></p></div>"
+		+ "<div class='copy-text-wrap'>"
+		+ "<p>회원님은 3개월 이상 비밀번호를 변경하지 않으셨습니다. 소중한 개인정보 보호를 위해 비밀번호를 변경해 주시기 바랍니다.</p>"
+		+ "<p>비밀번호를 주기적으로 변경하면 개인정보를 더 안전하게 보호할 수 있습니다.</p>"
+		+ "</div>"
+		//+ "<input type='hidden' id='mbrCtfDrmId' name='mbrCtfDrmId' value='" + mbrCtfDrmId + "'>"
+		, okTxt: "지금 변경"
+		, cancelTxt: "3개월 연장"
+		, callbackFn: fnChngPw
+		, rejectFn: fnExtension3M
+	});
+}
+
+function fnPopMostChnPw() {
+	loca_Alert({title: "비밀번호 변경 안내"
+		, msg: "<div class='copy-text-wrap text-lg'><p><strong class='text-lg'>비밀번호를 변경해 주세요</strong></p></div>"
+		+ "<div class='copy-text-wrap'>"
+		+ "<p>회원님의 소중한 개인정보를 더 안전하게 보호하기 위해 비밀번호를 변경해주세요.</p>"
+		+ "</div>"
+		//+ "<input type='hidden' id='mbrCtfDrmId' name='mbrCtfDrmId' value='" + mbrCtfDrmId + "'>"
+		, okTxt: "비밀번호 변경"
+		// , callbackFn: fnChngPw
+		, callbackFn: function() { cmnGoAuthPage('LTL'); }
+	});
+}
+
+// AML : 자금세탁
+function fnPop() {
+	loca_Alert({title: "정보변경 확인 안내"
+		, msg: "<div class='copy-text-wrap text-lg'><p><strong class='text-lg'>비밀번호를 변경해 주세요</strong></p></div>"
+		+ "<div class='copy-text-wrap'>"
+		+ "<p>회원님의 소중한 개인정보를 더 안전하게 보호하기 위해 비밀번호를 변경해주세요.</p>"
+		+ "</div>"
+		, okTxt: "비밀번호 변경"
+		// , callbackFn: fnChngPw
+		, callbackFn: function() { cmnGoAuthPage('AML'); }
+	});
+}
+
+function fnPopChnIdPw() {
+	loca_Alert({title: "아이디·비밀번호 변경 안내"
+		, msg: "<div class='copy-text-wrap text-lg'>"
+		+ "			<p><strong class='text-lg'>롯데카드 온라인 서비스 이용을 위하여 아이디 및 비밀번호를 변경해주세요.</strong></p>"
+		+ "		</div>"
+		+ "		<div class='copy-text-wrap'>"
+		+ "			<p>기존 롯데 패밀리 회원으로 아이디 중복인 경우</p>"
+		+ "			<p>최근 다양한 기관에서 개인정보 침해 사고로 회원님의 계정이 도용의 우려가 있는 경우</p>"
+		+ "			<p>※ 추가 문의사항은 롯데카드 고객센터(<a href='tel:1588-8100' class='text-link text-blue'>1588-8100</a>)로 연락주세요.</p>"
+		+ "		</div>"
+		, okTxt: "아이디·비밀번호 변경"
+		// , callbackFn: fnChngIdPw
+		, callbackFn: function() { cmnGoAuthPage('RLN'); }
+	});
+}
+
+//'3개월 연장' 버튼
+function fnExtension3M() {
+	if( cmf_IsDoubleSubmit() ) {
+ 		return;
+ 	}
+	
+	var f = document.loginForm;
+	
+	var ajax = svcf_Ajax('/app/api/LPMBRAC_A130.lc', f, {
+		async: false
+	});
+	
+	if(ajax != false) {
+		if(ajax.Status.code != 0) {
+			loca_Alert({msg: ajax.Status.message});
+		} else {
+			fnDoIdLogin();
+		}
+	}
+}
+
+// 비밀번호 변경 function
+function fnChngPw() {
+	//console.log("비밀번호 변경 : " + mbrCtfDrmId);
+	var f = document.loginForm;
+	f.mbrCtfDrmId.value = $("#mbrCtfDrmId").val()
+	loca_Popup("/app/LPMBRAC_P100.lc", f);
+}
+
+// 아이디&비밀번호 설정 function
+function fnChngIdPw() {
+	//console.log("비밀번호 변경 : " + mbrCtfDrmId);
+	var f = document.loginForm;
+	f.mbrCtfDrmId.value = $("#mbrCtfDrmId").val()
+	loca_Popup("/app/LPMBRAC_P200.lc", f);
+}
+// ==================== 아이디 로그인 ====================
+// 로그인 function
+function fnDoIdLogin() {
+	console.log(" *** TO-BE LOGIN *** ");
+	var f = document.loginForm;
+	
+	if($("#mbrCtfEncV").val() == null || $("#mbrCtfEncV").val() == "") {
+		loca_Alert({msg: "비밀번호를 입력해 주세요."});
+		return false;
+	}
+	
+	npVCtrl.hideAll();
+	
+	f.lgnType.value = "id";
+	f.mbrCtfDrmId.value = $("#mbrCtfDrmId").val();
+	f.mbrCtfEncV.value = $("#mbrCtfEncV").val();
+	console.log("LPMBRAB_A100 : 아이디 로그인");
+
+	NetFunnel_Action({action_id:"Login_M"},function(ev,ret){
+		svcf_Ajax("/app/api/LPMBRAB_A100.lc", f, {
+			callbackFn: fnDoIdLoginCallback
+			, sendFn: loca_LodingOn
+			, stopFn: loca_LodingOff
+		});
+	});
+}
+
+// 로그인 콜백 function
+function fnDoIdLoginCallback(status, data) {
+	if (status.code != 0) {
+		if(status.msgCode == "EXEAPP") {				// 앱 실행
+			fnGoApp();
+			// loca_ExecuteApp();
+		} else if (status.msgCode == "IC0500114") {
+			etGoAppCardAppDown();
+		} else if(status.msgCode == "IC0500102") {
+			loca_Alert({msg: status.message});
+		} else if(status.msgCode == "IC0500113" || status.msgCode == "IC0500107") {
+			svcf_Link("/app/LPMBRAC_V900.lc?type=NCD");
+		} else {
+			loca_Alert({msg: status.message});
+		}
+	} else {
+		$("#reUrl").val(data.resVO.reUrl);
+		$("#encRrno").val(data.resVO.encRrno);
+		$("#cno").val(data.resVO.inCno);
+		$("#setKind").val(data.resVO.resCode);
+		
+		// 210913 : CMI : samsungpay 로그인 추가
+		if(data.resVO.samsungpayYn == "Y") {
+			$("#login_type").val("samsungpay");
+		}
+		
+		if(data.resVO.resCode != null && data.resVO.resCode != "") {
+			svcf_Link("/app/LPMBRAC_V900.lc?type=" + data.resVO.resCode + "&mbrCtfDrmId=" + $("#mbrCtfDrmId").val());
+		} else if (typeof data.resVO != "undefined") {
+			if(data.resVO.mbrType == "JUN" && data.resVO.mbrCorp == true) {
+				$("#mbrCtfDrmId").val("");
+				$("#mbrCtfEncV").val("");
+				var LPTKN = uif_GetCookie("JWT");
+				var corpParams = "LPTKN=" + encodeURIComponent(LPTKN);
+				svcf_Link(data.resVO.reUrl, corpParams, "_blank");
+			} else {
+				svcf_Link(data.resVO.reUrl);
+			}
+		} else {
+			eval(data.action);
+		}
+	}
+}
+
+
+
+
+</script>
+
+	
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+
+function fnDoGetFirebaseUrlToOtp(otpSeq,RTN_URL) {
+	
+	var lpFirebaseUrlFront 			= "";		
+	var lpFirebaseUrlBack 			= "";		
+	var lpFirebaseUrlData 			= "";		
+	var lpFirebaseUrlDataSepalator 	= "";		
+	
+	var certType 	= "appc";  					
+	var processType = "LOGIN"; 	
+	var reUrl		= "/app/LPBNFBC_V100.lc";			
+	var allmyYN		= "allMy_LOGIN"==processType?"Y":"N";	
+	if ("Y"==allmyYN){
+		processType = "LOGIN";
+		reUrl = RTN_URL;
+	}
+
+	
+	var userAgent = navigator.userAgent;
+	if (userAgent.indexOf('iPhone') > -1 || userAgent.indexOf('iPad') > -1 || userAgent.indexOf('iPod') > -1) {
+		// iOS URL
+		lpFirebaseUrlFront 			= "https://lcacapp.page.link/?link=https://lcacapp.page.link/";
+		lpFirebaseUrlBack 			= "&apn=com.lcacApp&isi=688047200&ibi=com.lottecard.appcard&efr=1";
+		lpFirebaseUrlData 			= "data?";
+		lpFirebaseUrlDataSepalator 	= "^";
+	} else if (userAgent.indexOf('Android') > -1 || userAgent.indexOf('Linux') > -1) {
+		// Android URL
+		lpFirebaseUrlFront 			= "https://lcacapp.page.link/?link=https://lcacapp.page.link/";
+		lpFirebaseUrlBack 			= "&apn=com.lcacApp&isi=688047200&ibi=com.lottecard.appcard&amv=4123";
+		lpFirebaseUrlData 			= "data?";
+		lpFirebaseUrlDataSepalator 	= "^";
+	}
+	
+	
+	lpFirebaseUrlData += "processType=" + processType 
+						+ lpFirebaseUrlDataSepalator + "certType=" + certType
+						+ lpFirebaseUrlDataSepalator + "apptid=" + otpSeq 
+						+ lpFirebaseUrlDataSepalator + "acctid=LC"
+						+ lpFirebaseUrlDataSepalator + "act=LOGIN"
+						+ lpFirebaseUrlDataSepalator + "ch=LC_WEB"
+						+ lpFirebaseUrlDataSepalator + "reUrl=" + reUrl			
+						;
+	if ("Y"==allmyYN) {
+		lpFirebaseUrlData += lpFirebaseUrlDataSepalator + "isAllMy=Y"
+		;
+	}
+	
+	
+	var lpFirebaseUrl = lpFirebaseUrlFront + lpFirebaseUrlData + lpFirebaseUrlBack;
+	
+	
+	return lpFirebaseUrl;
+}
+
+
+function fnDoGetFirebaseUrlToPublicCert(checkType, certificateKey1, certificateKey2) {
+
+	
+	var lpFirebaseUrlFront 			= "";		
+	var lpFirebaseUrlBack 			= "";		
+	var lpFirebaseUrlData 			= "";		
+	var lpFirebaseUrlDataSepalator 	= "";		
+	
+	var certType 	= "cert";					
+	var processType = "LOGIN";	
+	var reUrl		= "/app/LPBNFBC_V100.lc";			
+	var pgmId		= "LPMBRAB_V100";			
+	var iPageCd		= "MANAAV100";		
+	var trans_id 	= certificateKey1;
+	var srv_cert 	= certificateKey2;
+	
+	
+	var userAgent = navigator.userAgent;
+	if (userAgent.indexOf('iPhone') > -1 || userAgent.indexOf('iPad') > -1 || userAgent.indexOf('iPod') > -1) {
+		// iOS URL
+		lpFirebaseUrlFront 			= "https://lcacapp.page.link/?link=https://lcacapp.page.link/";
+		lpFirebaseUrlBack 			= "&apn=com.lcacApp&isi=688047200&ibi=com.lottecard.appcard&efr=1";
+		lpFirebaseUrlData 			= "data?";
+		lpFirebaseUrlDataSepalator 	= "^";
+		
+		
+		trans_id = btoa(certificateKey1);
+		srv_cert = btoa(certificateKey2);
+	} else if (userAgent.indexOf('Android') > -1 || userAgent.indexOf('Linux') > -1) {
+		// Android URL
+		lpFirebaseUrlFront 			= "https://lcacapp.page.link/?link=https://lcacapp.page.link/";
+		lpFirebaseUrlBack 			= "&apn=com.lcacApp&isi=688047200&ibi=com.lottecard.appcard&amv=4123";
+		lpFirebaseUrlData 			= "data?";
+		lpFirebaseUrlDataSepalator 	= "^";
+	}
+	
+	
+	lpFirebaseUrlData += "processType=" + processType 
+						+ lpFirebaseUrlDataSepalator + "certType=" + certType
+						+ lpFirebaseUrlDataSepalator + "iPageCd=" + iPageCd
+						+ lpFirebaseUrlDataSepalator + "biz_id=LMW" + checkType
+						+ lpFirebaseUrlDataSepalator + "trans_id=" + trans_id
+						+ lpFirebaseUrlDataSepalator + "srv_cert=" + srv_cert
+						+ lpFirebaseUrlDataSepalator + "pgm_id=" + pgmId
+						+ lpFirebaseUrlDataSepalator + "IOS_RETURN_APP=lottecard"
+						+ lpFirebaseUrlDataSepalator + "reUrl=" + reUrl		
+						;
+	
+	
+	var lpFirebaseUrl = lpFirebaseUrlFront + lpFirebaseUrlData + lpFirebaseUrlBack;
+		
+	
+	return lpFirebaseUrl;
+}
+//]]>
+</script>
+	
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+
+function fnDoGetFirebaseUrlToInstallorMenu(menuId) {
+	
+	var lpFirebaseUrlFront 			= "";		
+	var lpFirebaseUrlBack 			= "";		
+	var lpFirebaseUrlMenu			= "";		
+	
+	
+	if (loca_IsIOS()) {
+		// iOS URL
+		lpFirebaseUrlFront 			= "https://lcacapp.page.link/?link=https://lcacapp.page.link/";
+		lpFirebaseUrlBack 			= "&apn=com.lcacApp&isi=688047200&ibi=com.lottecard.appcard&efr=1";
+		lpFirebaseUrlMenu 			= "menu/";
+	} else if (loca_IsAOS()) {
+		// Android URL
+		lpFirebaseUrlFront 			= "https://lcacapp.page.link/?link=https://lcacapp.page.link/";
+		lpFirebaseUrlBack 			= "&apn=com.lcacApp&isi=688047200&ibi=com.lottecard.appcard&amv=4123";
+		lpFirebaseUrlMenu 			= "menu/";
+	}
+	
+	
+	if(typeof(menuId) != undefined  &&  menuId != null && menuId != "") {
+		console.log("########### " + menuId);
+		lpFirebaseUrlMenu += menuId;
+		
+	} else {
+		lpFirebaseUrlMenu = "";
+	}
+	
+	
+	var lpFirebaseUrl = lpFirebaseUrlFront + lpFirebaseUrlMenu + lpFirebaseUrlBack;
+	
+	
+	return lpFirebaseUrl;
+}
+
+//]]>
+</script>
+
+	
+			<!-- header --> 
+			
+			<!-- //header -->
+		
+
+
+
+<script type="text/javascript" src="/pluginfree/js/nppfs-1.13.0_20210604.js" charset="utf-8"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(){	
+	npPfsCtrl.setColor({
+		TextColor : "", 			// 키보드보안 글자 색상
+		FieldBgColor : "", 			// 키보드보안 배경 색상
+		ReTextColor : "", 			// 키보드보안 치환 글자 색상
+		ReFieldBgColor : "", 		// 키보드보안 치환 배경 색상
+		OnTextColor : "#000000", 	// 마우스입력기 포커스 글자 색상
+		OnFieldBgColor : "#FFFFFF", // 마우스입력기 포커스 배경 색상
+		OffTextColor : "#000000", 	// 마우스입력기 글자 색상
+		OffFieldBgColor : "#FFFFFF" // 마우스입력기 배경 색상
+	});
+	
+	uV.dV.Fz = "/pluginfree/pluginfreeInstall.jsp"; // 설치안내 페이지
+	
+	npPfsStartup(document.nppfForm, true, true, true, true, "npkencrypt", "on");
+});
+
+function nppfsCopyForm(targetForm) {
+	$("form[name=nppfForm] input[name='__E2E_UNIQUE__']").remove();
+	$("form[name=nppfForm] input[name='__E2E_KEYPAD__']").remove();
+	
+	var inner = $("form[name=nppfForm] .nppfs-elements").html();
+	
+	//$("#"+targetForm+" .nppfs-elements").append(inner);
+}
+
+var npPfsExtension = new function() {
+	this.keyValidation = function(element, keyCode) {
+		var type = element.getAttribute("data-keypad-type");
+		if (type == "num") {
+			var key = parseInt("" + keyCode);
+			if(key < 48 || key > 57) {
+				return false;
+			}	
+		}
+		return true;
+	},
+	this.formatter = function($element, isInput) {
+		var str = $element.val();
+		var type = $element.attr("nppfs-formatter-type");
+		switch(type) {
+			case "card":
+				if (isInput) {
+					if (str.startsWith("37")) {
+						$element.attr("maxlength", "15");
+						var cvcId = $element.attr("nppfs-cvc-id");
+						$("#"+cvcId).attr("maxlength", "4");
+						if (str.length >= 7 && str.length <= 12) {
+							str = str.substring(0, str.length-1) + "*";
+						}
+						if (str.length <= 10) {
+							return str.replace(/-/g, '').replace(/([\d*]{4})([\d*]{1,6})/g, '$1-$2');
+						} else if (str.length > 10) {
+							return str.replace(/-/g, '').replace(/([\d*]{4})([\d*]{6})([\d*]{1,5})/g, '$1-$2-$3');
+						}
+					} else {
+						$element.attr("maxlength", "16");
+						var cvcId = $element.attr("nppfs-cvc-id");
+						$("#"+cvcId).attr("maxlength", "3");
+						if (str.length >= 7 && str.length <= 12) {
+							str = str.substring(0, str.length-1) + "*";
+						}
+						if (str.length <= 8) {
+							return str.replace(/-/g, '').replace(/([\d*]{4})([\d*]{1,4})/g, '$1-$2');
+						} else if (str.length <= 12) {
+							return str.replace(/-/g, '').replace(/([\d*]{4})([\d*]{4})([\d*]{1,4})/g, '$1-$2-$3');
+						} else if (str.length > 12) {
+							return str.replace(/-/g, '').replace(/([\d*]{4})([\d*]{4})([\d*]{4})([\d*]{1,4})/g, '$1-$2-$3-$4');
+						}
+					}
+				}else {
+					return str.replace(/[^\d*]+/g, '');
+				}
+			case "rrno":
+				if (isInput) {
+					$element.attr("maxlength", "13");
+					if (str.length >= 7 && str.length <= 13) {
+						str = str.substring(0, str.length-1) + "*";
+					}
+					if (str.length <= 13) {
+						return str.replace(/-/g, '').replace(/([\d*]{6})([\d*]{1,7})/g, '$1-$2');
+					}
+				} else {
+					return str.replace(/[^\d*]+/g, '');
+				}
+			case "giftcard":
+				if (isInput) {
+					if (str.length >= 1 && str.length <= 21) {
+						str = str.substring(0, str.length-1) + "*";
+					}
+					if (str.length <= 8) {
+						return str.replace(/-/g, '').replace(/([\d*]{4})([\d*]{1,4})/g, '$1-$2');
+					} else if (str.length <= 12) {
+						return str.replace(/-/g, '').replace(/([\d*]{4})([\d*]{4})([\d*]{1,4})/g, '$1-$2-$3');
+					} else if (str.length <= 16) {
+						return str.replace(/-/g, '').replace(/([\d*]{4})([\d*]{4})([\d*]{4})([\d*]{1,4})/g, '$1-$2-$3-$4');
+					} else if (str.length > 16) {
+						return str.replace(/-/g, '').replace(/([\d*]{4})([\d*]{4})([\d*]{4})([\d*]{4})([\d*]{1,5})/g, '$1-$2-$3-$4-$5');
+					}
+				} else {
+					return str.replace(/[^\d*]+/g, '');
+				}
+		}
+		return str;
+	}
+};
+
+npPfsExtension.ExtendUI = {};
+
+npPfsExtension.ExtendUI.cvc = new function() {
+	this.divid = "div-extendui-cvc";
+	this.$thisdiv = null;
+	this.instance = {};
+	this.docked = false;
+	
+	
+	this.html = function() {
+		if(this.docked) return null;
+		this.docked = false;
+
+		var html = [];
+		return html.join("\n");
+	}
+	
+	
+	this.mounted = function() {
+		this.$thisdiv = jQuery("#" + this.divid);
+
+		this.$thisdiv.on('click', function(){
+			event.stopPropagation();
+		});
+
+		this.$thisdiv.parents('.box_sckeypad_wrap').on('click', function(){
+			npVCtrl.hideAll();
+			$(this).removeClass("active");
+		});
+
+		var _this = this;
+		var list = jQuery(".box_keyinput .keybox", this.$thisdiv);
+
+		this.timerid = setInterval(function(){
+			var len = _this.length();
+			for(var i = 0; i < list.length; i++) {
+				if(i < len) jQuery(list.get(i)).addClass("on");
+				else jQuery(list.get(i)).removeClass("on");
+			}
+		}, 500);
+	}
+	
+	
+	this.append = function(keypad, html) {
+		var name = keypad._element.name;
+		this.instance[name] = keypad;
+		jQuery("div.box_sckeypad", this.$thisdiv).append(html);
+		
+/* 		var touch = jQuery(".kpd-touch", "#"+keypad._uuid);
+		var subCss = {
+				"background-color": "#0048fd", 
+				"justify-self": "center", 
+				"height": "56px", 
+				"width": "56px", 
+				"margin-left": "auto", 
+				"margin-right": "auto", 
+				"border-radius": "50%"
+			};
+		jQuery(".kpd-button.touch1", "#"+keypad._uuid).css({"background": "transparent"}).append($("<div/>").css(subCss));
+		jQuery(".kpd-button.touch2", "#"+keypad._uuid).css({"background": "transparent"}).append($("<div/>").css(subCss)); */
+	}
+
+	
+	this.on = function(keypad) {
+		var _this = this;
+	}
+	
+	
+	this.off = function() {
+		clearInterval(this.timerid);
+	}
+	
+	
+	this.hide = function(keypad) {
+		if(this.$thisdiv) {
+			this.$thisdiv.parents(".box_sckeypad_wrap").removeClass("active");
+			this.$thisdiv.parents(".box_sckeypad_wrap").hide();
+		}
+		
+		
+		if("false" == "true") {
+			$(".float-ars-menu").show();
+		}
+	}
+	
+	
+	this.show = function(keypad, params) {
+		if(params && params.message){
+			for(var key in params.message) {
+				jQuery("h2.text_title." + key, this.$thisdiv).html(params.message[key]);
+			}
+		}
+
+		
+		if(!this.$thisdiv.parents(".box_sckeypad_wrap").hasClass("active")) {
+			this.$thisdiv.parents(".box_sckeypad_wrap").addClass("active");
+			this.$thisdiv.parents(".box_sckeypad_wrap").show();
+		}
+		var keyPadId = "#txt_" + this.divid.split("-")[2];
+		var bottom = parseInt($("body").height()) - parseInt($(keyPadId).offset().top) - 80;
+		console.log("1bottom == " + $(keyPadId).offset().top)
+		console.log("2bottom == " + bottom)
+		var keyPadHt = $("#"+this.divid).height();
+		console.log("keyPadHt == " + keyPadHt);
+		var top = $(keyPadId).offset().top;
+		var css = ".popup-content";
+		if ($(".popup-content").length == 0) {
+			css = ".sub-container";
+		}
+		var sTop = $(css).scrollTop();
+		console.log("sTop == " + sTop + " | bottom == " + bottom);
+		if (bottom < keyPadHt) {
+			$(css).css("padding-bottom", keyPadHt+"px");
+			console.log("3bottom == " + bottom)
+			if (sTop > 0) {
+				bottom = sTop + keyPadHt - bottom;
+				console.log("bottom == " + bottom)
+				$(css).animate({scrollTop: bottom}, 500)
+			} else {
+				$(css).animate({scrollTop: keyPadHt-bottom}, 500)
+			}
+		}
+		//잉카에서 전달 해준 부분에서 추가로 작업 : 클로우즈 되 었을 때 값을 삭제
+		//fnCdCVCInit();
+		
+		
+		if("false" == "true") {
+			$(".float-ars-menu").hide();
+		}
+	}
+	
+	
+	this.length = function() {
+		var len = 0;
+	
+		for(var key in this.instance) {
+			len += this.instance[key].length();
+		}
+		return len;
+	}
+	
+	
+	this.input = function(keypad, keyCode, type) {
+		
+		if(type === "delete") {
+		}
+
+		
+		if(type === "ignore") {
+			
+			if(this.length() === 4) {
+				var name = keypad._element.name;
+				this.instance["cvc"].activate();
+				this.instance["cvc"].deleteone();
+			}
+		}
+	
+		
+		if(type === "clear") {
+			
+			for(var key in this.instance) {
+				len += this.instance[key].reset();
+			}
+			this.instance["cvc"].activate();
+		}
+	
+		
+		var len = this.length();
+		var list = jQuery(".box_keyinput .keybox", this.$thisdiv);
+
+		for(var i = 0; i < list.length; i++) {
+			if(i < len) {
+				jQuery(list.get(i)).addClass("on");
+			} else {
+				jQuery(list.get(i)).removeClass("on");
+			}
+		}
+	}
+
+	
+	this.close = function(keypad) {
+	}
+};
+
+npPfsExtension.ExtendUI.cardPw4 = new function() {
+
+
+	this.divid = "div-extendui-cardPw4";
+	this.$thisdiv = null;
+	this.instance = {};
+	this.docked = false;
+	
+	this.html = function() {
+		if(this.docked) return null;
+		this.docked = false;
+
+		var html = [];
+		return html.join("\n");
+	}
+
+	
+	this.mounted = function() {
+		this.$thisdiv = jQuery("#" + this.divid);
+
+
+		this.$thisdiv.on('click', function(){
+			event.stopPropagation();
+		});
+
+		
+		this.$thisdiv.parents('.box_sckeypad_wrap').on('click', function(){
+			npVCtrl.hideAll();
+			$(this).removeClass("active");
+		});
+
+		var _this = this;
+		var list = jQuery(".box_keyinput .keybox", this.$thisdiv);
+
+		
+		this.timerid = setInterval(function(){
+			var len = _this.length();
+
+			for(var i = 0; i < list.length; i++) {
+				if(i < len) jQuery(list.get(i)).addClass("on");
+				//else if(i == len) jQuery(list.get(i)).toggleClass("on");
+				else jQuery(list.get(i)).removeClass("on");
+			}
+		}, 500);
+		
+		
+	}
+
+	this.append = function(keypad, html) {
+		//console.log(keypad);
+		var name = keypad._element.name;
+		this.instance[name] = keypad;
+		jQuery("div.box_sckeypad", this.$thisdiv).append(html);
+		
+		/* var touch = jQuery(".kpd-touch", "#"+keypad._uuid);
+		var subCss = {
+				"background-color": "#0048fd", 
+				"justify-self": "center", 
+				"height": "56px", 
+				"width": "56px", 
+				"margin-left": "auto", 
+				"margin-right": "auto", 
+				"border-radius": "50%"
+			};
+		jQuery(".kpd-button.touch1", "#"+keypad._uuid).css({"background": "transparent"}).append($("<div/>").css(subCss));
+		jQuery(".kpd-button.touch2", "#"+keypad._uuid).css({"background": "transparent"}).append($("<div/>").css(subCss)); */
+	}
+
+
+	this.on = function(keypad) {
+		var _this = this;
+	}
+
+	this.off = function() {
+		clearInterval(this.timerid);
+	}
+	
+	
+	this.hide = function(keypad) {
+		if(this.$thisdiv) {
+			this.$thisdiv.parents(".box_sckeypad_wrap").removeClass("active");
+			this.$thisdiv.parents(".box_sckeypad_wrap").hide();
+		}
+		
+		
+		if("false" == "true") {
+			$(".float-ars-menu").show();
+		}		
+	}
+	
+
+	this.show = function(keypad, params) {
+		
+		//console.log("show 할때 ");
+		
+		if(params && params.message){
+			for(var key in params.message) {
+				jQuery("h2.text_title." + key, this.$thisdiv).html(params.message[key]);
+			}
+		}
+
+
+		if(!this.$thisdiv.parents(".box_sckeypad_wrap").hasClass("active")) {
+			this.$thisdiv.parents(".box_sckeypad_wrap").addClass("active");
+			this.$thisdiv.parents(".box_sckeypad_wrap").show();
+		}
+		
+		//잉카에서 전달 해준 부분에서 추가로 작업 : 클로우즈 되 었을 때 값을 삭제
+		//fnCdPwInit()
+		var keyPadId = "#txt_" + this.divid.split("-")[2];
+		var bottom = parseInt($("body").height()) - parseInt($(keyPadId).offset().top) - 80;
+		var keyPadHt = $("#"+this.divid).height();
+		var top = $(keyPadId).offset().top;
+		var css = ".popup-content";
+		if ($(".popup-content").length == 0) {
+			css = ".sub-container";
+		}
+		var sTop = $(css).scrollTop();
+		if (bottom < keyPadHt) {
+			$(css).css("padding-bottom", keyPadHt+"px");
+			if (sTop > 0) {
+				bottom = sTop + keyPadHt - bottom;
+				$(css).animate({scrollTop: bottom}, 500)
+			} else {
+				$(css).animate({scrollTop: keyPadHt-bottom}, 500)
+			}
+		}
+		
+		
+		if("false" == "true") {
+			$(".float-ars-menu").hide();
+		}
+	}
+	
+
+	this.length = function() {
+		var len = 0;
+		
+		for(var key in this.instance) {
+			len += this.instance[key].length();
+		}
+		return len;
+		//console.log("length");
+	}
+	
+
+	
+
+	this.input = function(keypad, keyCode, type) {
+		
+		if(type === "delete") {
+			// do nothing..
+		}
+
+		if(type === "ignore") {
+			
+			if(this.length() === 4) {
+				var name = keypad._element.name;
+				this.instance["cardPw4"].activate();
+				this.instance["cardPw4"].deleteone();
+			}
+		}
+		
+		if(type === "clear") {
+			for(var key in this.instance) {
+				len += this.instance[key].reset();
+			}
+			this.instance["cardPw4"].activate();
+		}
+		
+		var len = this.length();
+		var list = jQuery(".box_keyinput .keybox", this.$thisdiv);
+		
+		for(var i = 0; i < list.length; i++) {
+			if(i < len) {
+				jQuery(list.get(i)).addClass("on");
+			}
+			/* else if(i == len) {
+				jQuery(list.get(i)).toggleClass("on");
+			} */
+			else {
+				jQuery(list.get(i)).removeClass("on");
+			}
+		}
+		
+	}
+	
+	this.close = function(keypad) {
+		
+	}
+};
+
+npPfsExtension.ExtendUI.cardPw2 = new function() {
+
+
+	this.divid = "div-extendui-cardPw2";
+	this.$thisdiv = null;
+	this.instance = {};
+	this.docked = false;
+	
+	this.html = function() {
+		if(this.docked) return null;
+		this.docked = false;
+
+		var html = [];
+		return html.join("\n");
+	}
+
+	
+	this.mounted = function() {
+		this.$thisdiv = jQuery("#" + this.divid);
+
+
+		this.$thisdiv.on('click', function(){
+			event.stopPropagation();
+		});
+
+		
+		this.$thisdiv.parents('.box_sckeypad_wrap').on('click', function(){
+			npVCtrl.hideAll();
+			$(this).removeClass("active");
+		});
+
+		var _this = this;
+		var list = jQuery(".box_keyinput .keybox", this.$thisdiv);
+
+		
+		this.timerid = setInterval(function(){
+			var len = _this.length();
+
+			for(var i = 0; i < list.length; i++) {
+				if(i < len) jQuery(list.get(i)).addClass("on");
+				//else if(i == len) jQuery(list.get(i)).toggleClass("on");
+				else jQuery(list.get(i)).removeClass("on");
+			}
+		}, 500);
+		
+		
+	}
+
+	this.append = function(keypad, html) {
+		//console.log(keypad);
+		var name = keypad._element.name;
+		this.instance[name] = keypad;
+		jQuery("div.box_sckeypad", this.$thisdiv).append(html);
+		
+		/* var touch = jQuery(".kpd-touch", "#"+keypad._uuid);
+		var subCss = {
+				"background-color": "#0048fd", 
+				"justify-self": "center", 
+				"height": "56px", 
+				"width": "56px", 
+				"margin-left": "auto", 
+				"margin-right": "auto", 
+				"border-radius": "50%"
+			};
+		jQuery(".kpd-button.touch1", "#"+keypad._uuid).css({"background": "transparent"}).append($("<div/>").css(subCss));
+		jQuery(".kpd-button.touch2", "#"+keypad._uuid).css({"background": "transparent"}).append($("<div/>").css(subCss)); */
+	}
+
+
+	this.on = function(keypad) {
+		var _this = this;
+	}
+
+	this.off = function() {
+		clearInterval(this.timerid);
+	}
+	
+	
+	this.hide = function(keypad) {
+		if(this.$thisdiv) {
+			this.$thisdiv.parents(".box_sckeypad_wrap").removeClass("active");
+			this.$thisdiv.parents(".box_sckeypad_wrap").hide();
+		}
+		
+		
+		if("false" == "true") {
+			$(".float-ars-menu").show();
+		}		
+	}
+	
+
+	this.show = function(keypad, params) {
+		if(params && params.message){
+			for(var key in params.message) {
+				jQuery("h2.text_title." + key, this.$thisdiv).html(params.message[key]);
+			}
+		}
+
+
+		if(!this.$thisdiv.parents(".box_sckeypad_wrap").hasClass("active")) {
+			this.$thisdiv.parents(".box_sckeypad_wrap").addClass("active");
+			this.$thisdiv.parents(".box_sckeypad_wrap").show();
+		}
+		var keyPadId = "#txt_" + this.divid.split("-")[2];
+		var bottom = parseInt($("body").height()) - parseInt($(keyPadId).offset().top) - 80;
+		var keyPadHt = $("#"+this.divid).height();
+		var top = $(keyPadId).offset().top;
+		var css = ".popup-content";
+		if ($(".popup-content").length == 0) {
+			css = ".sub-container";
+		}
+		var sTop = $(css).scrollTop();
+		if (bottom < keyPadHt) {
+			$(css).css("padding-bottom", keyPadHt+"px");
+			if (sTop > 0) {
+				bottom = sTop + keyPadHt - bottom;
+				$(css).animate({scrollTop: bottom}, 500)
+			} else {
+				$(css).animate({scrollTop: keyPadHt-bottom}, 500)
+			}
+		}
+		
+		
+		if("false" == "true") {
+			$(".float-ars-menu").hide();
+		}		
+	}
+	
+
+	this.length = function() {
+		var len = 0;
+		
+		for(var key in this.instance) {
+			len += this.instance[key].length();
+		}
+		return len;
+		//console.log("length");
+	}
+	
+
+	
+
+	this.input = function(keypad, keyCode, type) {
+		
+		if(type === "delete") {
+			// do nothing..
+		}
+
+		if(type === "ignore") {
+			
+			if(this.length() === 2) {
+				var name = keypad._element.name;
+				this.instance["cardPw2"].activate();
+				this.instance["cardPw2"].deleteone();
+			}
+		}
+		
+		if(type === "clear") {
+			for(var key in this.instance) {
+				len += this.instance[key].reset();
+			}
+			this.instance["cardPw2"].activate();
+		}
+		
+		var len = this.length();
+		var list = jQuery(".box_keyinput .keybox", this.$thisdiv);
+		
+		for(var i = 0; i < list.length; i++) {
+			if(i < len) {
+				jQuery(list.get(i)).addClass("on");
+			}
+			/* else if(i == len) {
+				jQuery(list.get(i)).toggleClass("on");
+			} */
+			else {
+				jQuery(list.get(i)).removeClass("on");
+			}
+		}
+		
+	}
+	
+	this.close = function(keypad) {
+		
+	}
+}
+
+npPfsExtension.ExtendUI.rrno = new function() {
+
+
+	this.divid = "div-extendui-rrno";
+	this.$thisdiv = null;
+	this.instance = {};
+	this.docked = false;
+	
+	this.html = function() {
+		if(this.docked) return null;
+		this.docked = false;
+
+		var html = [];
+		return html.join("\n");
+	}
+
+	
+	this.mounted = function() {
+		this.$thisdiv = jQuery("#" + this.divid);
+
+
+		this.$thisdiv.on('click', function(){
+			event.stopPropagation();
+		});
+
+		
+		this.$thisdiv.parents('.box_sckeypad_wrap').on('click', function(){
+			npVCtrl.hideAll();
+			$(this).removeClass("active");
+		});
+
+		var _this = this;
+		var list = jQuery(".box_keyinput .keybox", this.$thisdiv);
+
+		
+		this.timerid = setInterval(function(){
+			var len = _this.length();
+
+			for(var i = 0; i < list.length; i++) {
+				if(i < len) jQuery(list.get(i)).addClass("on");
+				//else if(i == len) jQuery(list.get(i)).toggleClass("on");
+				else jQuery(list.get(i)).removeClass("on");
+			}
+		}, 500);
+		
+		
+	}
+
+	this.append = function(keypad, html) {
+		//console.log(keypad);
+		var name = keypad._element.name;
+		this.instance[name] = keypad;
+		jQuery("div.box_sckeypad", this.$thisdiv).append(html);
+		
+		/* var touch = jQuery(".kpd-touch", "#"+keypad._uuid);
+		var subCss = {
+				"background-color": "#0048fd", 
+				"justify-self": "center", 
+				"height": "56px", 
+				"width": "56px", 
+				"margin-left": "auto", 
+				"margin-right": "auto", 
+				"border-radius": "50%"
+			};
+		jQuery(".kpd-button.touch1", "#"+keypad._uuid).css({"background": "transparent"}).append($("<div/>").css(subCss));
+		jQuery(".kpd-button.touch2", "#"+keypad._uuid).css({"background": "transparent"}).append($("<div/>").css(subCss)); */
+	}
+
+
+	this.on = function(keypad) {
+		var _this = this;
+	}
+
+	this.off = function() {
+		clearInterval(this.timerid);
+	}
+	
+	
+	this.hide = function(keypad) {
+		if(this.$thisdiv) {
+			this.$thisdiv.parents(".box_sckeypad_wrap").removeClass("active");
+			this.$thisdiv.parents(".box_sckeypad_wrap").hide();
+		}
+		
+		
+		if("false" == "true") {
+			$(".float-ars-menu").show();
+		}
+	}
+	
+
+	this.show = function(keypad, params) {
+		if(params && params.message){
+			for(var key in params.message) {
+				jQuery("h2.text_title." + key, this.$thisdiv).html(params.message[key]);
+			}
+		}
+
+
+		if(!this.$thisdiv.parents(".box_sckeypad_wrap").hasClass("active")) {
+			this.$thisdiv.parents(".box_sckeypad_wrap").addClass("active");
+			this.$thisdiv.parents(".box_sckeypad_wrap").show();
+		}
+		
+		var keyPadId = "#txt_" + this.divid.split("-")[2];
+		var bottom = parseInt($("body").height()) - parseInt($(keyPadId).offset().top) - 80;
+		var keyPadHt = $("#"+this.divid).height();
+		var top = $(keyPadId).offset().top;
+		var css = ".popup-content";
+		if ($(".popup-content").length == 0) {
+			css = ".sub-container";
+		}
+		var sTop = $(css).scrollTop();
+		if (bottom < keyPadHt) {
+			$(css).css("padding-bottom", keyPadHt+"px");
+			if (sTop > 0) {
+				bottom = sTop + keyPadHt - bottom;
+				$(css).animate({scrollTop: bottom}, 500)
+			} else {
+				$(css).animate({scrollTop: keyPadHt-bottom}, 500)
+			}
+		}
+		
+		
+		if("false" == "true") {
+			$(".float-ars-menu").hide();
+		}
+	}
+	
+
+	this.length = function() {
+		var len = 0;
+		
+		for(var key in this.instance) {
+			len += this.instance[key].length();
+		}
+		return len;
+	}
+	
+
+	
+
+	this.input = function(keypad, keyCode, type) {
+		
+		if(type === "delete") {
+			// do nothing..
+		}
+
+		if(type === "ignore") {
+			
+			if(this.length() === 7) {
+				var name = keypad._element.name;
+				this.instance["rrno"].activate();
+				this.instance["rrno"].deleteone();
+			}
+		}
+		
+		if(type === "clear") {
+			for(var key in this.instance) {
+				len += this.instance[key].reset();
+			}
+			this.instance["rrno"].activate();
+		}
+		
+		var len = this.length();
+		var list = jQuery(".box_keyinput .keybox", this.$thisdiv);
+		
+		for(var i = 0; i < list.length; i++) {
+			if(i < len) {
+				jQuery(list.get(i)).addClass("on");
+			}
+			else if(i == len) {
+				jQuery(list.get(i)).toggleClass("on");
+			}
+			else {
+				jQuery(list.get(i)).removeClass("on");
+			}
+		}
+		
+	}
+	
+	this.close = function(keypad) {
+		
+	}
+}
+</script>
+<form name="nppfForm"></form>
+	
+
+<script type="text/javascript" src="/js/mpl_webview.js" charset="utf-8"></script> 
+<script type="text/javascript">
+//<![CDATA[
+	var global_retry_cnt = 0;
+	function _callback_ahnlab(res_code, res_dtl) {
+		/* 
+			XHR(XML Http Response)
+		*/
+		if(loca_IsAOS()){
+			if(res_code != 200) {
+				global_retry_cnt++;
+				
+				switch(res_dtl) {
+				case 70:
+					console.log("HTTP ERROR CODE : " + res_code + ", DETAIL_CODE : " + res_dtl);
+				case 71:
+					console.log("HTTP ERROR CODE : " + res_code + ", DETAIL_CODE : " + res_dtl);
+					if (global_retry_cnt < 3) {
+						//v3_start2();
+					}
+				case 72:
+					console.log("HTTP ERROR CODE : " + res_code + ", DETAIL_CODE : " + res_dtl);
+					if (global_retry_cnt < 3) {
+						//v3_start2();
+					}
+				case 73:
+					console.log("HTTP ERROR CODE : " + res_code + ", DETAIL_CODE : " + res_dtl);
+					break;
+				default:
+					console.log("HTTP ERROR CODE : " + res_code);
+					break;
+				}
+				return;
+			}
+			if(res_dtl == 0) {
+				global_retry_cnt = 0;
+				return;
+			}
+			switch(res_dtl) {
+			case 83:
+				break;
+			case 99:
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	
+	function v3_start() {
+
+	}
+	
+	function v3_click() {
+		if (!loca_IsAPP()) {
+			if(loca_IsAOS()){
+				try {
+					var LK 	= "-4044587422865019762826660346657862584087355208943298216246281250641343414417715043310843739431096745455978983377984848664300518823308915790865232640490751";
+					var DT	= "2022-03-24-14:23";
+					var type = mpl_status();
+					if ("ALIVE" != type) {
+						mpl_start(LK, DT);	
+					}	
+				}catch(e) {
+					console.log("error");
+				}
+			}
+		}
+	}
+
+	function v3_load() {
+		if (!loca_IsAPP()) {
+			if(loca_IsAOS()){
+				try {
+					var f = document.v3from;
+					var tk = f.v3TK.value;
+					var cd = f.v3CD.value;
+					mpl_load(tk, cd);	
+				}catch(e) {
+					console.log("error");
+				}
+			}
+			
+		}
+	}
+
+	function v3_appendForm(formObj) {
+		if (!loca_IsAPP()) {
+			if(loca_IsAOS()){
+				var token = mpl_token();
+				var encParam = mpl_enc_param();
+				$('<input type="hidden" id="v3TK" name="v3TK"/>').appendTo(formObj).val(token);
+				$('<input type="hidden" id="v3CD" name="v3CD"/>').appendTo(formObj).val(encParam);	
+			}
+		}
+	}
+//]]>
+</script>
+
+<form name="v3from">
+	<input type="hidden" id="v3TK" name="v3TK" value =""/>
+	<input type="hidden" id="v3CD" name="v3CD" value =""/>
+</form>
+<script>
+
+</script>
+
+			</main>
+			
+			
+		</div>
+	</div>
+	<!-- //컨텐츠 영역 -->
+	
+	<div id="layerPop" class=""></div>
+	<div id="bottomSheet" class=""></div>
+	<div id="keyPadArea"></div>
+	<div id="locaLoading"></div>
+	
+
+
+
+
+<script type="text/javascript">
+
+pageviewObj.dimension2 = "";
+pageviewObj.dimension6 = "";
+pageviewObj.dimension7 = "";
+pageviewObj.dimension8 = "";
+pageviewObj.dimension9 = "";
+pageviewObj.dimension21 = "U";
+pageviewObj.dimension22 = "";
+pageviewObj.dimension23 = "";
+pageviewObj.dimension24 = "";
+pageviewObj.dimension29 = "";
+pageviewObj.dimension30 = "";
+pageviewObj.dimension31 = "";
+pageviewObj.dimension32 = "";
+pageviewObj.dimension33 = "";
+pageviewObj.dimension34 = "";
+pageviewObj.dimension35 = "";
+pageviewObj.dimension36 = "";
+pageviewObj.dimension37 = "";
+pageviewObj.dimension38 = "";
+pageviewObj.dimension39 = "";
+pageviewObj.dimension40 = "";
+pageviewObj.dimension41 = "";
+pageviewObj.dimension58 = "";
+if (!utlf_IsNullOrEmpty("")) {
+	pageviewObj.dimension58 = ("" == "01") ? "정회원" : "준회원";
+}
+
+pageviewObj.dimension4 = "U";
+pageviewObj.dimension10 = "MO_WEB";
+pageviewObj.dimension11 = "N";
+pageviewObj.dimension59 = "";
+pageviewObj.dimension5 = "U";
+
+try {
+	if ("MEMBERS>Mobile Web 로그인>로그인" != "") {
+		var depts = "MEMBERS>Mobile Web 로그인>로그인".split(">");
+		pageviewObj.dimension15 = (depts[0] != undefined) ? depts[0] : "";
+		pageviewObj.dimension16 = (depts[1] != undefined) ? depts[0] + ">" + depts[1] : depts[0];
+	}
+	if ("MB_6" != "") {
+		pageviewObj.dimension57 = "MB_6";
+	}
+	
+	if (document.referrer) {
+		pageviewObj.dimension59 = document.referrer;
+	}
+	
+	GA_SetUtmData();
+} catch (e) {
+	console.log("GA ERROR : " + e);
+}
+
+
+dataLayer = [pageviewObj];
+
+//가상페이지뷰
+function GA_Virtual(title, location){
+	var pdc = GA_GetParameter("pdc");
+	if (!utlf_IsNullOrEmpty(pdc)) {
+		pdc = "?pdc=" + pdc;
+	}
+	dataLayer.push({
+		'event' : 'ga_virtual',
+		'v_location' : location + pdc,
+		'v_title' : title,
+		...pageviewObj
+	});
+}
+// 가상페이지뷰 이벤트 태깅
+function GA_Virtual_Event(label, pgmId) {
+	var title = "MEMBERS>Mobile Web 로그인>로그인";
+	var dept1 = "";
+	if ("MEMBERS>Mobile Web 로그인>로그인" != "") {
+		var depts = "MEMBERS>Mobile Web 로그인>로그인".split(">");
+		dept1 = (depts[0] != undefined) ? depts[0] : "";
+		if (dept1 != "") {
+			dept1 = (depts[1] != undefined) ? depts[0] + ">" + depts[1] : depts[0];
+		}
+	}
+	try{
+		if (pgmId.indexOf("evnBultSeq") > -1) {
+			var pgmIdLen = pgmId.indexOf("_");
+			var evnPgmId = pgmId.substring(pgmIdLen+1);
+			pageviewObj.dimension57 = evnPgmId;
+		} else {
+			pageviewObj.dimension57 = pgmId;
+		}
+	} catch (e) {
+		pageviewObj.dimension57 = pgmId;
+	}
+
+	var location = window.location.host + window.location.pathname + "_" + pgmId;
+	dataLayer.push({
+		'event' : 'ga_virtual_event',
+		'v_category' : "팝업",
+		'v_action' : "Popup View",
+		'v_label' : label,
+		'v_location' : location,
+		'v_title' : dept1 + ">" + label,
+		...pageviewObj
+	});
+}
+
+function GA_SetUtmData() {
+	//utmMedium 43 캠페인활동식별자
+	//utmSource 44 수행캠페인활동식별자
+	//utmCampaign 45 수행캠페인활동대체식별자
+	var pUtmMedium = GA_GetParameter("utm_medium");
+	if (!utlf_IsNullOrEmpty(pUtmMedium)) {
+		pageviewObj.dimension43 = pUtmMedium;
+		if (!loca_IsAPP()) {
+			window.sessionStorage.setItem("__PARAMETER_UTM_MEDIUM__", pUtmMedium);
+		} else {
+			loca_SaveDataToFile("__PARAMETER_UTM_MEDIUM__", pUtmMedium);
+		}
+	} else {
+		if (!loca_IsAPP()) {
+			var sUtmMedium = window.sessionStorage.getItem("__PARAMETER_UTM_MEDIUM__");
+			pageviewObj.dimension43 = sUtmMedium;
+		} else {
+			loca_LoadDataFromMemory("__PARAMETER_UTM_MEDIUM__", function(data) {
+				pageviewObj.dimension43 = data;
+			});
+		}
+	}
+	
+	var pUtmSource = GA_GetParameter("utm_source");
+	if (!utlf_IsNullOrEmpty(pUtmSource)) {
+		pageviewObj.dimension44 = pUtmSource;
+		if (!loca_IsAPP()) {
+			window.sessionStorage.setItem("__PARAMETER_UTM_SOURCE__", pUtmSource);
+		} else {
+			loca_SaveDataToFile("__PARAMETER_UTM_SOURCE__", pUtmSource);
+		}
+	} else {
+		if (!loca_IsAPP()) {
+			var sUtmSource = window.sessionStorage.getItem("__PARAMETER_UTM_SOURCE__");
+			pageviewObj.dimension44 = sUtmSource;
+		} else {
+			loca_LoadDataFromMemory("__PARAMETER_UTM_SOURCE__", function(data) {
+				pageviewObj.dimension44 = data;
+			});
+		}
+	}
+	
+	var pUtmCampaign = GA_GetParameter("utm_campaign");
+	if (!utlf_IsNullOrEmpty(pUtmCampaign)) {
+		pageviewObj.dimension45 = pUtmSource;
+		if (!loca_IsAPP()) {
+			window.sessionStorage.setItem("__PARAMETER_UTM_CAMPAIGN__", pUtmCampaign);
+		} else {
+			loca_SaveDataToFile("__PARAMETER_UTM_CAMPAIGN__", pUtmCampaign);
+		}
+	} else {
+		if (!loca_IsAPP()) {
+			var sUtmCampaign = window.sessionStorage.getItem("__PARAMETER_UTM_CAMPAIGN__");
+			pageviewObj.dimension45 = sUtmCampaign;
+		} else {
+			loca_LoadDataFromMemory("__PARAMETER_UTM_CAMPAIGN__", function(data) {
+				pageviewObj.dimension45 = data;
+			});
+		}
+	}
+	
+	var pCmsCno = GA_GetParameter("cmscno");
+	if (!utlf_IsNullOrEmpty(pCmsCno)) {
+		pageviewObj.dimension56 = pCmsCno;
+		if (!loca_IsAPP()) {
+			window.sessionStorage.setItem("__PARAMETER_CNO__", pCmsCno);
+		} else {
+			loca_SaveDataToFile("__PARAMETER_CNO__", pCmsCno);
+		}
+	} else {
+		if (!loca_IsAPP()) {
+			var sCmsCno = window.sessionStorage.getItem("__PARAMETER_CNO__");
+			pageviewObj.dimension56 = sCmsCno;
+		} else {
+			loca_LoadDataFromMemory("__PARAMETER_CNO__", function(data) {
+				pageviewObj.dimension56 = data;
+			});
+		}
+	}
+}
+
+function GA_GetParameter(name) {
+	try {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		    results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));	
+	} catch (e) {
+		return "";
+	}
+
+}
+</script>
+
+
+	
+	
+		<!-- 211007 : CMI : [TEST] 로그인 후 챗봇 이동 추가 -->
+		
+
+
+
+
+
+
+<!-- 2017-12-12 수정 [s] -->
+
+
+	
+
+
+
+	
+ 
+
+
+
+
+
+	<script>
+
+// 이벤트
+var LOCA2_UI = (function(lc, $) {
+    lc.init = function() {
+
+        lc.gnb.init();
+    }
+
+
+    lc.gnb = {
+        init: function() {
+            this._bindEvent();
+            this._setDefaultAria();
+        },
+        _setDefaultAria() {
+            $('.menu-list li').each(function(index) {
+                var setDefault = $(this).find('.is-active');
+                $(this).attr('id', 'anchor' + index).attr('anchor-index', '-1').attr('aria-selected', 'false');
+            })
+            $('.depth2-section').each(function(index) {
+                var setDefault = $(this).find('.is-active');
+                $(this).attr('aria-labelledby', 'anchor' + index).attr('anchor-index', '-1');
+            })
+        },
+        _bindEvent: function() {
+            if ($('.gnb-layer').hasClass('no-scroll')) {
+                //21-10-25 디지털ARS-빠른카드신청 전체메뉴 제외
+                return;
+            }
+            this._scroll();
+        },
+        _scroll: function() {
+            // layer 유형 (popup-content 스크롤)
+            var scrollFnc;
+            var depth2Section = $('.depth2-section');
+            var menuList = $('.menu-list');
+            var menuListChildren = $('.menu-list > li');
+            var depth2Heights = [];
+
+            $('.gnb-layer:not(.gnb-page) .popup-content').scroll(function(e) {
+                /*21-07-16 수정*/
+                clearTimeout(scrollFnc);
+                scrollFnc = setTimeout(function() {
+                    scrollFinish();
+                }, 100);
+            })
+
+            function setSize() {
+                depth2Heights = [];
+                depth2Section.each(function() {
+                    depth2Heights.push($(this).height() + 32);
+                })
+            }
+
+            function activeMenu(index) {
+                var targetTrigger = menuListChildren.eq(index);
+                var targetX = -targetTrigger.offset().left + menuList.offset().left;
+
+                targetTrigger.addClass('is-active').attr('anchor-index', '0').attr('aria-selected', 'true').siblings().removeClass('is-active').attr('anchor-index', '-1').attr('aria-selected', 'false');
+                $('.scroll-x').animate({
+                    scrollLeft: -targetX + 'px'
+                })
+                $('.menu-sticky').removeClass('fixed')
+                if ($('.popup-content').scrollTop() > 100) {
+                    $('.menu-sticky').addClass('fixed')
+                }
+
+            }
+            function activeSection(index) {
+                var currentSection = depth2Section.eq(index)
+                currentSection.addClass('is-active').attr('anchor-index', '0').siblings().removeClass('is-active').attr('anchor-index', '-1');
+            }
+
+            function scrollFinish() {
+                var t = $('.popup-content').scrollTop() - 100;
+                var h = 0;
+                var index = 0;
+
+                for (var i = 0; i < depth2Section.length; i++) {
+                    h += depth2Heights[i];
+                    if (t < h) {
+                        index = i;
+                        break;
+                    }
+                }
+                activeMenu(index);
+                activeSection(index)
+            }
+
+            setSize();
+
+            $('.menu-list > li').on('click', function() {
+                var _this = $(this);
+                var index = _this.index();
+                activeMenu(index);
+                var top = index ? depth2Heights.slice(0, index).reduce(function(a, b) {
+                    return a + b;
+                }) + 180 : 0;
+
+                $('.gnb-layer:not(.gnb-page) .popup-content').animate({
+                    'scrollTop': top + 'px'
+                });
+            })
+        },
+    }
+
+
+
+    lc.init();
+    return lc;
+}(window.LOCA2_UI || {}, jQuery));
+
+
+  </script>
+
+
+	
+</body>
+
+
+</html>
+
+  
